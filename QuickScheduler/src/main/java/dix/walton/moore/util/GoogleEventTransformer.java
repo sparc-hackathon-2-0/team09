@@ -4,6 +4,9 @@ import com.google.api.services.calendar.model.Event;
 import org.apache.http.impl.cookie.DateParseException;
 import org.apache.http.impl.cookie.DateUtils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,19 +19,18 @@ public class GoogleEventTransformer {
 
         dix.walton.moore.model.Event internalEvent = new dix.walton.moore.model.Event();
 
-        System.out.println(googleEvent.toPrettyString());
+        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        DateFormat timeFormat = new SimpleDateFormat("hh:mm aaa");
 
-//            if (!googleEvent.getEndTimeUnspecified()){
-//                Date endDate = DateUtils.parseDate(googleEvent.getEnd().getDate());
-//
-//                internalEvent.setEndTime(DateUtil.toTime(endDate));
-//            }
-//            Date startDate = DateUtils.parseDate(googleEvent.getStart().getDate());
-                internalEvent.setEndTime(googleEvent.getEnd().getDateTime().toString());
+        try {
+            internalEvent.setEventDate(dateFormat.parse(googleEvent.getStart().getDateTime().toString()).toString());
+            internalEvent.setEndTime(timeFormat.parse(googleEvent.getEnd().getDateTime().toString()).toString());
+            internalEvent.setStartTime(timeFormat.parse(googleEvent.getStart().getDateTime().toString()).toString());
+        } catch (ParseException e) {
 
-            internalEvent.setEventDate(googleEvent.getStart().getDateTime().toString());
+        }
 
-            internalEvent.setId(googleEvent.getId());
+        internalEvent.setId(googleEvent.getId());
             internalEvent.setLocation(googleEvent.getLocation());
             internalEvent.setStartTime(googleEvent.getStart().getDateTime().toString());
             internalEvent.setTitle(googleEvent.getSummary());

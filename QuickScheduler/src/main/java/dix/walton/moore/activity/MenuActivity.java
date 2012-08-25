@@ -346,11 +346,6 @@ public class MenuActivity extends Activity {
 
         Intent verifyIntent = new Intent(this, VerifyActivity.class);
         dix.walton.moore.model.Event ourEvent = GoogleEventTransformer.convertToOurEvent(result);
-        System.out.println("skjdhfkjsdhfkjshfkjsdhfkjsdhfkjsdhf " +ourEvent.getId());
-System.out.println(ourEvent.getId());
-//System.out.println(ourEvent.getLocation());
-System.out.println(ourEvent.getStartTime());
-System.out.println(ourEvent.getTitle());
         verifyIntent.putExtra("event", ourEvent);
         startActivity(verifyIntent);
     }
