@@ -1,6 +1,7 @@
 package dix.walton.moore.model;
 
 import android.text.format.Time;
+import dix.walton.moore.util.DateUtil;
 
 import java.util.Date;
 
@@ -63,5 +64,26 @@ public class Event {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object eventObj) {
+
+        Event event = null;
+
+        if (eventObj instanceof Event) {
+            event = (Event) eventObj;
+        }
+
+        if (event.getId() == this.getId() &&
+                event.getEndTime().equals(this.getEndTime()) &&
+                event.getStartTime().equals(this.getStartTime()) &&
+                DateUtil.isSameDay(event.getEventDate(), this.getEventDate()) &&
+                event.getLocation().equals(this.getLocation()) &&
+                event.getTitle().equals(this.getTitle())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

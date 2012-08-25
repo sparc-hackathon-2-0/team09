@@ -2,8 +2,6 @@ package dix.walton.moore.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.text.format.Time;
 import android.widget.EditText;
 import dix.walton.moore.R;
 import dix.walton.moore.model.Event;
@@ -16,6 +14,8 @@ import java.util.Date;
  * date: 8/25/12
  */
 public class VerifyActivity extends Activity {
+
+    private Event serviceEvent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class VerifyActivity extends Activity {
 
         //TODO replace this with steven's method
         Event parsedEvent = getMockEvent();
+        serviceEvent = parsedEvent;
 
         EditText verifyTitleInput = (EditText) findViewById(R.id.verifyTitleInput);
         EditText verifyDateInput = (EditText) findViewById(R.id.verifyDateInput);
@@ -60,5 +61,26 @@ public class VerifyActivity extends Activity {
         event.setEventDate(date);
 
         return event;
+    }
+
+    private boolean isEventChanged(Event event) {
+
+        if (event.equals(serviceEvent)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean deleteEvent(Event event) {
+
+        //TODO implement me
+        return true;
+    }
+
+    private boolean updateEvent(Event event) {
+
+        //TODO implement me
+        return true;
     }
 }
