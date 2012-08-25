@@ -87,6 +87,7 @@ public class VerifyActivity extends MenuActivity {
         stubbedEvent.setTitle(verifyTitleInput.getText().toString());
         if(isEventChanged(stubbedEvent)){
             new AsyncDeleteEvent(this, serviceEvent.getId());
+            String newInput = getGoogleCallString(stubbedEvent);
     //            new AsyncCalendarQuickEvent()
         }
     }
@@ -129,5 +130,35 @@ public class VerifyActivity extends MenuActivity {
 
         //TODO implement me
         return true;
+    }
+    
+    private String getGoogleCallString(Event stubbedEvent) {
+
+        String newInput = "";
+
+        if (stubbedEvent.getTitle() != null) {
+
+            newInput = newInput + stubbedEvent.getTitle() + " ";
+        }
+        if (stubbedEvent.getLocation() != null) {
+           newInput = newInput + "at " + stubbedEvent.getLocation() + " ";
+        }
+        if (stubbedEvent.getEventDate() != null) {
+            newInput = newInput + "on " + stubbedEvent.getEventDate() + " ";
+
+            if (stubbedEvent.getStartTime() != null) {
+
+                if (stubbedEvent.getEndTime() != null) {
+                    newInput = newInput + stubbedEvent.getStartTime() + "-";
+                    newInput = newInput + stubbedEvent.getEndTime();
+                } else{
+                    newInput = newInput + stubbedEvent.getStartTime();
+                }
+            }
+        }
+
+        System.out.println(newInput);
+        return newInput;
+
     }
 }
