@@ -1,8 +1,10 @@
 # Project files #
 #################
 *.iml
+.DS_STORE
 
 \target
 \gen
 \bin
 \.settings
+\.idea
