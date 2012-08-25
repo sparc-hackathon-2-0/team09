@@ -17,12 +17,13 @@ public class GoogleEventTransformer {
         dix.walton.moore.model.Event internalEvent = new dix.walton.moore.model.Event();
 
         try {
-            Date endDate = DateUtils.parseDate(googleEvent.getEnd().getDate());
-            Date startDate = DateUtils.parseDate(googleEvent.getStart().getDate());
-
             if (!googleEvent.getEndTimeUnspecified()){
+                Date endDate = DateUtils.parseDate(googleEvent.getEnd().getDate());
+
                 internalEvent.setEndTime(DateUtil.toTime(endDate));
             }
+            Date startDate = DateUtils.parseDate(googleEvent.getStart().getDate());
+
             internalEvent.setEventDate(DateUtils.parseDate(googleEvent.getEnd().getDate()));
 
             internalEvent.setId(Long.valueOf(googleEvent.getId()));

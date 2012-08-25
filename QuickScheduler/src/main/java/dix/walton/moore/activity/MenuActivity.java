@@ -3,6 +3,7 @@ package dix.walton.moore.activity;
 import android.accounts.*;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -32,6 +33,7 @@ import android.widget.Button;
 import dix.walton.moore.util.GoogleEventTransformer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -194,6 +196,9 @@ public class MenuActivity extends Activity {
                     chooseAccount();
                 }
                 break;
+            case 1234:
+                handleVoiceEntryCompleted(data);
+                break;
         }
     }
 
@@ -303,18 +308,38 @@ public class MenuActivity extends Activity {
 
     public void handleMicButtonClick() {
 
-        startActivityForResult(new Intent(this, VoiceAddAcitivity.class), 0);
-        Bundle extras = getIntent().getExtras();
-        String value=null;
+        doVoice();
 
-        if(extras !=null) {
-            value = extras.getString("voiceString");
-        }
+    }
+
+    private void doVoice() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Voice recognition Demo...");
+        startActivityForResult(intent, 1234);
+    }
+
+    private void handleVoiceEntryCompleted(Intent data) {
+
+        ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+        String firstString = matches.get(0);
+        System.out.println(firstString);
 
         AsyncCalendarQuickEvent calendarQuickEventActivity = new AsyncCalendarQuickEvent(this);
-        calendarQuickEventActivity.setEventString(value);
+        calendarQuickEventActivity.setEventString("Appointment at Somewhere on June 3rd 10am-10:25am");
         calendarQuickEventActivity.execute();
-        Event result = calendarQuickEventActivity.getReturnedEvent();
+        Event result = null;
+        while(result == null)
+        {
+            try{
+                Thread.sleep(1000);
+                result = calendarQuickEventActivity.getReturnedEvent();
+            }catch (InterruptedException ie ){
+                System.out.println("bad stuff happened");
+            }
+
+        }
 
         Intent verifyIntent = new Intent(this, VerifyActivity.class);
         dix.walton.moore.model.Event ourEvent = GoogleEventTransformer.convertToOurEvent(result);

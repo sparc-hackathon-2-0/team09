@@ -62,9 +62,8 @@ public class VoiceAddAcitivity extends Activity {
 
         ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
         String firstString = matches.get(0);
-        Intent verifyIntent = new Intent(this, MenuActivity.class);
-        verifyIntent.putExtra("voiceString", firstString);
-        startActivity(verifyIntent);
+        data.putExtra("voiceString", firstString);
+
         finish();
     }
 }
