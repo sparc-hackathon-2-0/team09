@@ -58,6 +58,26 @@ public class AsyncLoadCalendars extends AsyncTask<Void, Void, Void> {
           CalendarInfo info = new CalendarInfo(calendar.getId(), calendar.getSummary());
           calendarSample.calendars.add(info);
         }
+          try {
+              calendarSample.calendars.clear();
+              com.google.api.services.calendar.Calendar.CalendarList.List list =
+                      client.calendarList().list();
+              CalendarListEntry calendarListEntry = client.calendarList().get("rapidcaltest@gmail.com").execute();
+              list.setFields("items");
+              CalendarList feed = list.execute();
+              if (feed.getItems() != null) {
+                  for (CalendarListEntry calendar : feed.getItems()) {
+                      CalendarInfo info = new CalendarInfo(calendar.getId(), calendar.getSummary());
+                      calendarSample.calendars.add(info);
+                  }
+              }
+              calendarSample.calendar = calendarListEntry;
+          } catch (IOException e) {
+              calendarSample.handleGoogleException(e);
+          } finally {
+              calendarSample.onRequestCompleted();
+          }
+          return null;
       }
     } catch (IOException e) {
       calendarSample.handleGoogleException(e);
