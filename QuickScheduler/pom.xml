@@ -20,6 +20,11 @@
             <url>https://maven-android-archetype.googlecode.com/svn/repository</url>
         </repository>
         <repository>
+            <id>google-api-services</id>
+            <name>googleapiservice</name>
+            <url>http://mavenrepo.google-api-java-client.googlecode.com/hg</url>
+        </repository>
+        <repository>
             <id>googlecode-ksoap2-android</id>
             <name>googlecode-ksoap2-android</name>
             <url>http://ksoap2-android.googlecode.com/svn/m2-repo</url>
@@ -58,10 +63,105 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.code.ksoap2-android</groupId>
-            <artifactId>ksoap2-android</artifactId>
-            <version>2.6.5</version>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-android2</artifactId>
+            <version>1.10.3-beta</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xpp3</artifactId>
+                    <groupId>xpp3</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>httpclient</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>android</artifactId>
+                    <groupId>com.google.android</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client-android2</artifactId>
+            <version>1.10.3-beta</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xpp3</artifactId>
+                    <groupId>xpp3</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>httpclient</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>android</artifactId>
+                    <groupId>com.google.android</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.10.3-beta</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xpp3</artifactId>
+                    <groupId>xpp3</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>httpclient</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>android</artifactId>
+                    <groupId>com.google.android</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-calendar</artifactId>
+            <version>v3-rev11-1.7.2-beta</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xpp3</artifactId>
+                    <groupId>xpp3</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>httpclient</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>android</artifactId>
+                    <groupId>com.google.android</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <!--<dependency>-->
+            <!--<groupId>com.google.code.ksoap2-android</groupId>-->
+            <!--<artifactId>ksoap2-android</artifactId>-->
+            <!--<version>2.6.5</version>-->
+        <!--</dependency>-->
         <!--
         ===================================
         GOOGLE MAPS DEPENDENCY
