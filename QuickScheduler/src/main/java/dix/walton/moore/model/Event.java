@@ -1,10 +1,6 @@
 package dix.walton.moore.model;
 
-import android.text.format.Time;
-import dix.walton.moore.util.DateUtil;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * user: ryan.moore
@@ -15,9 +11,9 @@ public class Event implements Serializable {
     String title;
     String startTime;
     String endTime;
-    Date eventDate;
+    String eventDate;
     String location;
-    Long id;
+    String id;
 
     public String getTitle() {
         return title;
@@ -43,11 +39,11 @@ public class Event implements Serializable {
         this.endTime = endTime;
     }
 
-    public Date getEventDate() {
+    public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
 
@@ -59,11 +55,11 @@ public class Event implements Serializable {
         this.location = location;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,7 +75,8 @@ public class Event implements Serializable {
         if (event.getId() == this.getId() &&
                 event.getEndTime().equals(this.getEndTime()) &&
                 event.getStartTime().equals(this.getStartTime()) &&
-                DateUtil.isSameDay(event.getEventDate(), this.getEventDate()) &&
+//                DateUtil.isSameDay(event.getEventDate(), this.getEventDate()) &&
+                event.getEventDate().equals(this.getEventDate()) &&
                 event.getLocation().equals(this.getLocation()) &&
                 event.getTitle().equals(this.getTitle())) {
             return true;

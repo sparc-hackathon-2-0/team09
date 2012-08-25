@@ -32,10 +32,7 @@ public class VerifyActivity extends Activity {
         if(extras !=null) {
             event = (Event) extras.getSerializable("event");
         }
-
-        //TODO replace this with steven's method
-        Event parsedEvent = getMockEvent();
-        serviceEvent = parsedEvent;
+        serviceEvent = event;
 
         EditText verifyTitleInput = (EditText) findViewById(R.id.verifyTitleInput);
         EditText verifyDateInput = (EditText) findViewById(R.id.verifyDateInput);
@@ -43,11 +40,11 @@ public class VerifyActivity extends Activity {
         EditText verifyEndTimeInput = (EditText) findViewById(R.id.verifyEndTimeInput);
         EditText verifyLocationInput = (EditText) findViewById(R.id.verifyLocaionInput);
 
-        verifyDateInput.setText(dateFormat.format(parsedEvent.getEventDate()));
-        verifyTitleInput.setText(parsedEvent.getTitle());
-        verifyStartTimeInput.setText(parsedEvent.getStartTime());
-        verifyEndTimeInput.setText(parsedEvent.getEndTime());
-        verifyLocationInput.setText(parsedEvent.getLocation());
+        verifyDateInput.setText(serviceEvent.getEventDate());
+        verifyTitleInput.setText(serviceEvent.getTitle());
+        verifyStartTimeInput.setText(serviceEvent.getStartTime());
+        verifyEndTimeInput.setText(serviceEvent.getEndTime());
+        verifyLocationInput.setText(serviceEvent.getLocation());
     }
 
     private Event getMockEvent() {
@@ -57,10 +54,10 @@ public class VerifyActivity extends Activity {
         Event event = new Event();
         event.setTitle("Poopy event");
         event.setEndTime(String.valueOf(date.getTime()));
-        event.setId(123L);
+        event.setId("123");
         event.setLocation("Home");
         event.setStartTime(String.valueOf(date.getTime()));
-        event.setEventDate(date);
+        event.setEventDate("tomorrow");
 
         return event;
     }

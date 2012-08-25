@@ -16,24 +16,22 @@ public class GoogleEventTransformer {
 
         dix.walton.moore.model.Event internalEvent = new dix.walton.moore.model.Event();
 
-        try {
-            if (!googleEvent.getEndTimeUnspecified()){
-                Date endDate = DateUtils.parseDate(googleEvent.getEnd().getDate());
+        System.out.println(googleEvent.toPrettyString());
 
-                internalEvent.setEndTime(DateUtil.toTime(endDate));
-            }
-            Date startDate = DateUtils.parseDate(googleEvent.getStart().getDate());
+//            if (!googleEvent.getEndTimeUnspecified()){
+//                Date endDate = DateUtils.parseDate(googleEvent.getEnd().getDate());
+//
+//                internalEvent.setEndTime(DateUtil.toTime(endDate));
+//            }
+//            Date startDate = DateUtils.parseDate(googleEvent.getStart().getDate());
+                internalEvent.setEndTime(googleEvent.getEnd().getDate());
 
-            internalEvent.setEventDate(DateUtils.parseDate(googleEvent.getEnd().getDate()));
+            internalEvent.setEventDate(googleEvent.getEnd().getDate());
 
-            internalEvent.setId(Long.valueOf(googleEvent.getId()));
+            internalEvent.setId(googleEvent.getId());
             internalEvent.setLocation(googleEvent.getLocation());
-            internalEvent.setStartTime(DateUtil.toTime(startDate));
+            internalEvent.setStartTime(googleEvent.getStart().getDate());
             internalEvent.setTitle(googleEvent.getDescription());
-        } catch (DateParseException dpe) {
-            System.out.println("DATE PARSE ERROR BERRY BERRY BAD MAN");
-        }
-
         return internalEvent;
     }
 }
