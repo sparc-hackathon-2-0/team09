@@ -12,7 +12,7 @@
  * the License.
  */
 
-package dix.walton.moore.calendar;
+package dix.walton.moore.activity;
 
 import com.google.api.services.calendar.Calendar.Calendars;
 import com.google.api.services.calendar.model.Calendar;
@@ -22,20 +22,16 @@ import android.os.AsyncTask;
 
 import java.io.IOException;
 
-/**
- * Asynchronously updates a calendar with a progress dialog.
- *
- * @author Ravi Mistry
- */
-class AsyncUpdateCalendar extends AsyncTask<Void, Void, Void> {
 
-  private final CalendarSample calendarSample;
+public class AsyncUpdateCalendar extends AsyncTask<Void, Void, Void> {
+
+  private final MenuActivity calendarSample;
   private final ProgressDialog dialog;
   private final int calendarIndex;
   private final Calendar entry;
   private com.google.api.services.calendar.Calendar client;
 
-  AsyncUpdateCalendar(CalendarSample calendarSample, int calendarIndex, Calendar entry) {
+  public AsyncUpdateCalendar(MenuActivity calendarSample, int calendarIndex, Calendar entry) {
     this.calendarSample = calendarSample;
     this.calendarIndex = calendarIndex;
     client = calendarSample.client;
@@ -70,6 +66,6 @@ class AsyncUpdateCalendar extends AsyncTask<Void, Void, Void> {
   @Override
   protected void onPostExecute(Void result) {
     dialog.dismiss();
-    calendarSample.refresh();
+//    calendarSample.refresh();
   }
 }

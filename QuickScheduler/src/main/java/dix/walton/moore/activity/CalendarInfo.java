@@ -12,16 +12,16 @@
  * the License.
  */
 
-package dix.walton.moore.calendar;
+package dix.walton.moore.activity;
 
 /**
  * Class that holds information about a Calendar.
  *
  * @author Ravi Mistry
  */
-class CalendarInfo implements Comparable<CalendarInfo> {
+public class CalendarInfo implements Comparable<CalendarInfo> {
   String id;
-  String summary;
+  public String summary;
 
   CalendarInfo(String id, String summary) {
     this.id = id;

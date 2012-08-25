@@ -12,7 +12,7 @@
  * the License.
  */
 
-package dix.walton.moore.calendar;
+package dix.walton.moore.activity;
 
 import com.google.common.base.Preconditions;
 

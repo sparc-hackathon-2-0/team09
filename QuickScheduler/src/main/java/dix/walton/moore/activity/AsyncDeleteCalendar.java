@@ -12,49 +12,45 @@
  * the License.
  */
 
-package dix.walton.moore.calendar;
-
-import com.google.api.services.calendar.Calendar.Calendars.Insert;
-import com.google.api.services.calendar.model.Calendar;
+package dix.walton.moore.activity;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import dix.walton.moore.activity.MenuActivity;
 
 import java.io.IOException;
 
 /**
- * Asynchronously insert a new calendar with a progress dialog.
+ * Asynchronously delete a calendar with a progress dialog.
  *
  * @author Ravi Mistry
  */
-class AsyncInsertCalendar extends AsyncTask<Void, Void, Void> {
+public class AsyncDeleteCalendar extends AsyncTask<Void, Void, Void> {
 
-  private final CalendarSample calendarSample;
+  private final MenuActivity calendarSample;
   private final ProgressDialog dialog;
-  private final Calendar entry;
+  private final int calendarIndex;
   private com.google.api.services.calendar.Calendar client;
 
-  AsyncInsertCalendar(CalendarSample calendarSample, Calendar entry) {
+  public AsyncDeleteCalendar(MenuActivity calendarSample, int calendarIndex) {
     this.calendarSample = calendarSample;
     client = calendarSample.client;
-    this.entry = entry;
+    this.calendarIndex = calendarIndex;
     dialog = new ProgressDialog(calendarSample);
   }
 
   @Override
   protected void onPreExecute() {
-    dialog.setMessage("Inserting calendar...");
+    dialog.setMessage("Deleting calendar...");
     dialog.show();
   }
 
   @Override
   protected Void doInBackground(Void... arg0) {
+    String calendarId = calendarSample.calendars.get(calendarIndex).id;
     try {
-      Insert insert = client.calendars().insert(entry);
-      insert.setFields("id,summary");
-      Calendar calendar = insert.execute();
-      CalendarInfo info = new CalendarInfo(calendar.getId(), calendar.getSummary());
-      calendarSample.calendars.add(info);
+      client.calendars().delete(calendarId).execute();
+      calendarSample.calendars.remove(calendarIndex);
     } catch (IOException e) {
       calendarSample.handleGoogleException(e);
     } finally {
@@ -66,6 +62,6 @@ class AsyncInsertCalendar extends AsyncTask<Void, Void, Void> {
   @Override
   protected void onPostExecute(Void result) {
     dialog.dismiss();
-    calendarSample.refresh();
+//    calendarSample.refresh();
   }
 }

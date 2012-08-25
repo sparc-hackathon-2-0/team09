@@ -1,7 +1,6 @@
-package dix.walton.moore.service;
+package dix.walton.moore.activity;
 
 import android.content.Context;
-import dix.walton.moore.model.Event;
 
 /**
  * user: ryan.moore
@@ -15,9 +14,7 @@ public class GoogleCalendarService {
         this.context = context;
     }
 
-    public Event createEvent(String eventString) {
-
-        //walton does stuff here
-        return new Event();
-    }
+//    public Event createEvent(String eventString) {
+//        new AsyncCalendarQuickEvent(this).execute();
+//    }
 }
