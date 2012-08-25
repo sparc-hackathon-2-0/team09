@@ -330,11 +330,8 @@ public class MenuActivity extends Activity {
         System.out.println(firstString);
 
         AsyncCalendarQuickEvent calendarQuickEventActivity = new AsyncCalendarQuickEvent(this);
-<<<<<<< HEAD
         calendarQuickEventActivity.setEventString(firstString);
-=======
         calendarQuickEventActivity.setEventString("Appointment at home on August 26 10am-10:25am");
->>>>>>> IM ABOUT TO POOP MY PANTS
         calendarQuickEventActivity.execute();
         Event result = null;
         while(result == null)
