@@ -2,6 +2,8 @@ package dix.walton.moore.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import dix.walton.moore.R;
 import dix.walton.moore.model.Event;
@@ -18,6 +20,14 @@ import java.util.Date;
 public class VerifyActivity extends MenuActivity {
 
     private Event serviceEvent;
+    EditText verifyTitleInput;
+    EditText verifyDateInput;
+    EditText verifyStartTimeInput;
+    EditText verifyEndTimeInput;
+    EditText verifyLocationInput;
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,13 +41,16 @@ public class VerifyActivity extends MenuActivity {
             System.out.print("here brah");
             event = (Event) extras.getSerializable("event");
         }
-
+        serviceEvent = event;
 
         EditText verifyTitleInput = (EditText) findViewById(R.id.verifyTitleInput);
         EditText verifyDateInput = (EditText) findViewById(R.id.verifyDateInput);
         EditText verifyStartTimeInput = (EditText) findViewById(R.id.verifyStartTimeInput);
         EditText verifyEndTimeInput = (EditText) findViewById(R.id.verifyEndTimeInput);
         EditText verifyLocationInput = (EditText) findViewById(R.id.verifyLocaionInput);
+        Button verifyButton = (Button) findViewById(R.id.verifyButton);
+
+        verifyButton.setOnClickListener(new verifyOnclickListener());
 
         if (event.getEventDate() != null) {
             verifyDateInput.setText(event.getEventDate());
@@ -58,6 +71,26 @@ public class VerifyActivity extends MenuActivity {
 
     }
 
+    private class verifyOnclickListener implements View.OnClickListener{
+
+        public void onClick(View v) {
+            handleUpdateEvent();
+       }
+    }
+    public void handleUpdateEvent(){
+        Event stubbedEvent = new Event();
+        stubbedEvent.setEndTime(verifyEndTimeInput.getText().toString());
+        stubbedEvent.setEventDate(verifyDateInput.getText().toString());
+        stubbedEvent.setId(serviceEvent.getId());
+        stubbedEvent.setLocation(verifyLocationInput.getText().toString());
+        stubbedEvent.setStartTime(verifyStartTimeInput.getText().toString());
+        stubbedEvent.setTitle(verifyTitleInput.getText().toString());
+        if(isEventChanged(stubbedEvent)){
+            new AsyncDeleteEvent(this, serviceEvent.getId());
+    //            new AsyncCalendarQuickEvent()
+        }
+    }
+
     private Event getMockEvent() {
 
         Date date = new Date();
@@ -73,6 +106,8 @@ public class VerifyActivity extends MenuActivity {
         return event;
     }
 
+
+
     private boolean isEventChanged(Event event) {
 
         if (event.equals(serviceEvent)) {
@@ -81,6 +116,8 @@ public class VerifyActivity extends MenuActivity {
             return false;
         }
     }
+
+
 
     private boolean deleteEvent(Event event) {
 
