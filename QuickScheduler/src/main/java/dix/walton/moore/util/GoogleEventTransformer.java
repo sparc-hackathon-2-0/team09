@@ -19,16 +19,13 @@ public class GoogleEventTransformer {
 
         dix.walton.moore.model.Event internalEvent = new dix.walton.moore.model.Event();
 
+
         DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
         DateFormat timeFormat = new SimpleDateFormat("hh:mm aaa");
 
-        try {
-            internalEvent.setEventDate(dateFormat.parse(googleEvent.getStart().getDateTime().toString()).toString());
-            internalEvent.setEndTime(timeFormat.parse(googleEvent.getEnd().getDateTime().toString()).toString());
-            internalEvent.setStartTime(timeFormat.parse(googleEvent.getStart().getDateTime().toString()).toString());
-        } catch (ParseException e) {
-
-        }
+            internalEvent.setEventDate(dateFormat.format(googleEvent.getStart().getDateTime()));
+            internalEvent.setEndTime(timeFormat.format(googleEvent.getEnd().getDateTime()));
+            internalEvent.setStartTime(timeFormat.format(googleEvent.getStart().getDateTime()));
 
         internalEvent.setId(googleEvent.getId());
             internalEvent.setLocation(googleEvent.getLocation());
