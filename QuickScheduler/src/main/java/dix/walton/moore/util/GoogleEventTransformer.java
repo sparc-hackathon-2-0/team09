@@ -1,17 +1,19 @@
 package dix.walton.moore.util;
 
+import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 import org.apache.http.impl.cookie.DateParseException;
 import org.apache.http.impl.cookie.DateUtils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * user: ryan.moore
- * date: 8/25/12
+ * date: 8/25/12                                                                                      4
  */
 public class GoogleEventTransformer {
 
@@ -19,6 +21,7 @@ public class GoogleEventTransformer {
 
         dix.walton.moore.model.Event internalEvent = new dix.walton.moore.model.Event();
 
+<<<<<<< HEAD
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
         DateFormat timeFormat = new SimpleDateFormat("hh:mm aaa");
@@ -26,6 +29,23 @@ public class GoogleEventTransformer {
             internalEvent.setEventDate(dateFormat.format(googleEvent.getStart().getDateTime()));
             internalEvent.setEndTime(timeFormat.format(googleEvent.getEnd().getDateTime()));
             internalEvent.setStartTime(timeFormat.format(googleEvent.getStart().getDateTime()));
+=======
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        String startString;
+        try {
+            startString = googleEvent.getStart().getDateTime().toString();
+            internalEvent.setEventDate(dateFormat.parse(startString).toString());
+            if(!googleEvent.getEndTimeUnspecified())
+            {
+                String endString = googleEvent.getEnd().getDateTime().toString();
+                internalEvent.setEndTime(timeFormat.parse(endString, new ParsePosition(startString.indexOf('T') + 1)).toString());
+            }
+            internalEvent.setStartTime(timeFormat.parse(startString, new ParsePosition(startString.indexOf('T') + 1)).toString());
+        } catch (ParseException e) {
+            System.out.println("Exception thrown");
+        }
+>>>>>>> Date time parsing!!!
 
         internalEvent.setId(googleEvent.getId());
             internalEvent.setLocation(googleEvent.getLocation());
