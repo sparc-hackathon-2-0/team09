@@ -32,20 +32,7 @@ public class VoiceAddAcitivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.voice_recog);
-
-        Button speakButton = (Button) findViewById(R.id.speakButton);
-
-        wordsList = (ListView) findViewById(R.id.list);
-
-        // Disable button if no recognition service is present
-        PackageManager pm = getPackageManager();
-        List<ResolveInfo> activities = pm.queryIntentActivities(
-                new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-        if (activities.size() == 0)
-        {
-            speakButton.setEnabled(false);
-            speakButton.setText("Recognizer not present");
-        }
+        startVoiceRecognitionActivity();
     }
 
     /**
@@ -59,8 +46,8 @@ public class VoiceAddAcitivity extends Activity {
     /**
      * Fire an intent to start the voice recognition activity.
      */
-    private void startVoiceRecognitionActivity()
-    {
+    private void startVoiceRecognitionActivity() {
+
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -72,17 +59,18 @@ public class VoiceAddAcitivity extends Activity {
      * Handle the results from the voice recognition activity.
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK)
-        {
-            // Populate the wordsList with the String values the recognition engine thought it heard
-            ArrayList<String> matches = data.getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS);
-            wordsList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                    matches));
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        handleVoiceEntryCompleted(data);
     }
 
+    public void handleVoiceEntryCompleted(Intent data) {
+
+        ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+        String firstString = matches.get(0);
+        Intent verifyIntent = new Intent(this, VerifyActivity.class);
+        verifyIntent.putExtra("voiceString", firstString);
+        startActivity(verifyIntent);
+        finish();
+    }
 }
