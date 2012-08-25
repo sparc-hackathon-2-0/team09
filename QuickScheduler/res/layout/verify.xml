@@ -17,26 +17,47 @@
             <TableLayout android:id="@+id/tableLayout1"
                          android:layout_width="fill_parent" android:layout_height="fill_parent"
                          android:stretchColumns="1">
-                <TextView android:text="@string/verify_table_title" android:gravity="center" android:textSize="20dip"/>
+                <TextView android:text="@string/verify_table_title"
+                          android:gravity="center"
+                          android:textSize="20dip"/>
 
                 <TableRow android:padding="5dp">
-                    <TextView android:text="@string/title_label"/>
+                    <TextView android:text="@string/title_label"
+                            android:gravity="right"
+                            android:paddingRight="10dip"/>
                     <EditText android:id="@+id/verifyTitleInput" android:inputType="text" android:text="" />
                 </TableRow>
                 <TableRow android:padding="5dp">
-                    <TextView android:text="@string/date_label"/>
+                    <TextView android:text="@string/date_label"
+                              android:gravity="right"
+                              android:paddingRight="10dip"/>
                     <EditText android:id="@+id/verifyDateInput" android:inputType="text" android:text=""/>
                 </TableRow>
                 <TableRow android:padding="5dp">
+<<<<<<< HEAD
                     <TextView android:text="@string/start_time_label"/>
                     <EditText android:id="@+id/verifyStartTimeInput" android:inputType="text" android:text=""/>
                 </TableRow>
                 <TableRow android:padding="5dp">
                     <TextView android:text="@string/end_time_label"/>
                     <EditText android:id="@+id/verifyEndTimeInput" android:inputType="text" android:text=""/>
+=======
+                    <TextView android:text="@string/start_time_label"
+                              android:gravity="right"
+                              android:paddingRight="10dip"/>
+                    <EditText android:id="@+id/verifyStartTimeInput" android:inputType="date" android:text=""/>
                 </TableRow>
                 <TableRow android:padding="5dp">
-                    <TextView android:text="@string/location_label"/>
+                    <TextView android:text="@string/end_time_label"
+                              android:gravity="right"
+                              android:paddingRight="10dip"/>
+                    <EditText android:id="@+id/verifyEndTimeInput" android:inputType="date" android:text=""/>
+>>>>>>> Updating layout!!!
+                </TableRow>
+                <TableRow android:padding="5dp">
+                    <TextView android:text="@string/location_label"
+                              android:gravity="right"
+                              android:paddingRight="10dip"/>
                     <EditText android:id="@+id/verifyLocaionInput" android:inputType="text" android:text=""/>
                 </TableRow>
                 <TableRow android:padding="5dp">
