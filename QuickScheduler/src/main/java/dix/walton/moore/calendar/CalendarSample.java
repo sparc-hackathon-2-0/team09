@@ -12,7 +12,7 @@
  * the License.
  */
 
-package dix.walton.moore;
+package dix.walton.moore.calendar;
 
 import com.google.api.client.extensions.android2.AndroidHttp;
 import com.google.api.client.googleapis.GoogleHeaders;

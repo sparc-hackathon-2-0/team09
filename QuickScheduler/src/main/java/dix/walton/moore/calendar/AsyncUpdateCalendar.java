@@ -12,9 +12,9 @@
  * the License.
  */
 
-package dix.walton.moore;
+package dix.walton.moore.calendar;
 
-import com.google.api.services.calendar.Calendar.Calendars.Insert;
+import com.google.api.services.calendar.Calendar.Calendars;
 import com.google.api.services.calendar.model.Calendar;
 
 import android.app.ProgressDialog;
@@ -23,19 +23,21 @@ import android.os.AsyncTask;
 import java.io.IOException;
 
 /**
- * Asynchronously insert a new calendar with a progress dialog.
+ * Asynchronously updates a calendar with a progress dialog.
  *
  * @author Ravi Mistry
  */
-class AsyncInsertCalendar extends AsyncTask<Void, Void, Void> {
+class AsyncUpdateCalendar extends AsyncTask<Void, Void, Void> {
 
   private final CalendarSample calendarSample;
   private final ProgressDialog dialog;
+  private final int calendarIndex;
   private final Calendar entry;
   private com.google.api.services.calendar.Calendar client;
 
-  AsyncInsertCalendar(CalendarSample calendarSample, Calendar entry) {
+  AsyncUpdateCalendar(CalendarSample calendarSample, int calendarIndex, Calendar entry) {
     this.calendarSample = calendarSample;
+    this.calendarIndex = calendarIndex;
     client = calendarSample.client;
     this.entry = entry;
     dialog = new ProgressDialog(calendarSample);
@@ -43,17 +45,19 @@ class AsyncInsertCalendar extends AsyncTask<Void, Void, Void> {
 
   @Override
   protected void onPreExecute() {
-    dialog.setMessage("Inserting calendar...");
+    dialog.setMessage("Updating calendar...");
     dialog.show();
   }
 
   @Override
   protected Void doInBackground(Void... arg0) {
+    String calendarId = calendarSample.calendars.get(calendarIndex).id;
     try {
-      Insert insert = client.calendars().insert(entry);
-      insert.setFields("id,summary");
-      Calendar calendar = insert.execute();
-      CalendarInfo info = new CalendarInfo(calendar.getId(), calendar.getSummary());
+      Calendars.Patch patch = client.calendars().patch(calendarId, entry);
+      patch.setFields("id");
+      Calendar updatedCalendar = patch.execute();
+      calendarSample.calendars.remove(calendarIndex);
+      CalendarInfo info = new CalendarInfo(updatedCalendar.getId(), entry.getSummary());
       calendarSample.calendars.add(info);
     } catch (IOException e) {
       calendarSample.handleGoogleException(e);

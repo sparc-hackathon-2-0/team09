@@ -12,10 +12,10 @@
  * the License.
  */
 
-package dix.walton.moore;
+package dix.walton.moore.calendar;
 
-import com.google.api.services.calendar.Calendar.Calendars;
-import com.google.api.services.calendar.model.Calendar;
+import com.google.api.services.calendar.model.CalendarList;
+import com.google.api.services.calendar.model.CalendarListEntry;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -23,42 +23,42 @@ import android.os.AsyncTask;
 import java.io.IOException;
 
 /**
- * Asynchronously updates a calendar with a progress dialog.
+ * Asynchronously load the calendars with a progress dialog.
  *
  * @author Ravi Mistry
  */
-class AsyncUpdateCalendar extends AsyncTask<Void, Void, Void> {
+class AsyncLoadCalendars extends AsyncTask<Void, Void, Void> {
 
   private final CalendarSample calendarSample;
   private final ProgressDialog dialog;
-  private final int calendarIndex;
-  private final Calendar entry;
   private com.google.api.services.calendar.Calendar client;
 
-  AsyncUpdateCalendar(CalendarSample calendarSample, int calendarIndex, Calendar entry) {
+  AsyncLoadCalendars(CalendarSample calendarSample) {
     this.calendarSample = calendarSample;
-    this.calendarIndex = calendarIndex;
     client = calendarSample.client;
-    this.entry = entry;
     dialog = new ProgressDialog(calendarSample);
   }
 
   @Override
   protected void onPreExecute() {
-    dialog.setMessage("Updating calendar...");
+    dialog.setMessage("Loading calendars...");
     dialog.show();
   }
 
   @Override
   protected Void doInBackground(Void... arg0) {
-    String calendarId = calendarSample.calendars.get(calendarIndex).id;
     try {
-      Calendars.Patch patch = client.calendars().patch(calendarId, entry);
-      patch.setFields("id");
-      Calendar updatedCalendar = patch.execute();
-      calendarSample.calendars.remove(calendarIndex);
-      CalendarInfo info = new CalendarInfo(updatedCalendar.getId(), entry.getSummary());
-      calendarSample.calendars.add(info);
+      calendarSample.calendars.clear();
+      com.google.api.services.calendar.Calendar.CalendarList.List list =
+          client.calendarList().list();
+      list.setFields("items");
+      CalendarList feed = list.execute();
+      if (feed.getItems() != null) {
+        for (CalendarListEntry calendar : feed.getItems()) {
+          CalendarInfo info = new CalendarInfo(calendar.getId(), calendar.getSummary());
+          calendarSample.calendars.add(info);
+        }
+      }
     } catch (IOException e) {
       calendarSample.handleGoogleException(e);
     } finally {

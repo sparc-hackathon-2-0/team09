@@ -12,7 +12,7 @@
  * the License.
  */
 
-package dix.walton.moore;
+package dix.walton.moore.calendar;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;

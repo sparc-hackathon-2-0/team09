@@ -12,7 +12,7 @@
  * the License.
  */
 
-package dix.walton.moore;
+package dix.walton.moore.calendar;
 
 /**
  * Class that holds information about a Calendar.
