@@ -24,14 +24,14 @@ public class GoogleEventTransformer {
 //                internalEvent.setEndTime(DateUtil.toTime(endDate));
 //            }
 //            Date startDate = DateUtils.parseDate(googleEvent.getStart().getDate());
-                internalEvent.setEndTime(googleEvent.getEnd().getDate());
+                internalEvent.setEndTime(googleEvent.getEnd().getDateTime().toString());
 
-            internalEvent.setEventDate(googleEvent.getEnd().getDate());
+            internalEvent.setEventDate(googleEvent.getStart().getDateTime().toString());
 
             internalEvent.setId(googleEvent.getId());
             internalEvent.setLocation(googleEvent.getLocation());
-            internalEvent.setStartTime(googleEvent.getStart().getDate());
-            internalEvent.setTitle(googleEvent.getDescription());
+            internalEvent.setStartTime(googleEvent.getStart().getDateTime().toString());
+            internalEvent.setTitle(googleEvent.getSummary());
         return internalEvent;
     }
 }

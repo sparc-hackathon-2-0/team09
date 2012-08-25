@@ -23,16 +23,15 @@ public class VerifyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
-
         setContentView(R.layout.verify);
 
         Bundle extras = getIntent().getExtras();
         Event event = null;
         if(extras !=null) {
+            System.out.print("here brah");
             event = (Event) extras.getSerializable("event");
         }
-        serviceEvent = event;
+
 
         EditText verifyTitleInput = (EditText) findViewById(R.id.verifyTitleInput);
         EditText verifyDateInput = (EditText) findViewById(R.id.verifyDateInput);
@@ -40,11 +39,23 @@ public class VerifyActivity extends Activity {
         EditText verifyEndTimeInput = (EditText) findViewById(R.id.verifyEndTimeInput);
         EditText verifyLocationInput = (EditText) findViewById(R.id.verifyLocaionInput);
 
-        verifyDateInput.setText(serviceEvent.getEventDate());
-        verifyTitleInput.setText(serviceEvent.getTitle());
-        verifyStartTimeInput.setText(serviceEvent.getStartTime());
-        verifyEndTimeInput.setText(serviceEvent.getEndTime());
-        verifyLocationInput.setText(serviceEvent.getLocation());
+        if (event.getEventDate() != null) {
+            verifyDateInput.setText(event.getEventDate());
+        }
+        if (event.getTitle() != null) {
+
+            verifyTitleInput.setText(event.getTitle());
+        }
+        if (event.getStartTime() != null) {
+            verifyStartTimeInput.setText(event.getStartTime());
+        }
+        if (event.getEndTime() != null) {
+            verifyEndTimeInput.setText(event.getEndTime());
+        }
+        if (event.getLocation() != null) {
+            verifyLocationInput.setText(event.getLocation());
+        }
+
     }
 
     private Event getMockEvent() {

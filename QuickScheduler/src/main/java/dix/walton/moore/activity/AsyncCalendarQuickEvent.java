@@ -40,7 +40,7 @@ public class AsyncCalendarQuickEvent extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... arg0) {
         try {
             com.google.api.services.calendar.Calendar.Events.QuickAdd quickAdd = null;
-            quickAdd = client.events().quickAdd("primary", "TEST EVENT TODAY AT 3");
+            quickAdd = client.events().quickAdd("primary", eventString);
             Event event = quickAdd.execute();
             returnedEvent = event;
 

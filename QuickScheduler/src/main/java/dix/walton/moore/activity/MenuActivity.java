@@ -327,7 +327,7 @@ public class MenuActivity extends Activity {
         System.out.println(firstString);
 
         AsyncCalendarQuickEvent calendarQuickEventActivity = new AsyncCalendarQuickEvent(this);
-        calendarQuickEventActivity.setEventString("Appointment at Somewhere on June 3rd 10am-10:25am");
+        calendarQuickEventActivity.setEventString("Appointment at home on June 3rd 10am-10:25am");
         calendarQuickEventActivity.execute();
         Event result = null;
         while(result == null)
@@ -343,7 +343,27 @@ public class MenuActivity extends Activity {
 
         Intent verifyIntent = new Intent(this, VerifyActivity.class);
         dix.walton.moore.model.Event ourEvent = GoogleEventTransformer.convertToOurEvent(result);
+        System.out.println("skjdhfkjsdhfkjshfkjsdhfkjsdhfkjsdhf " +ourEvent.getId());
+System.out.println(ourEvent.getId());
+//System.out.println(ourEvent.getLocation());
+System.out.println(ourEvent.getStartTime());
+System.out.println(ourEvent.getTitle());
         verifyIntent.putExtra("event", ourEvent);
         startActivity(verifyIntent);
+    }
+
+    private dix.walton.moore.model.Event getMockEvent() {
+
+        Date date = new Date();
+
+        dix.walton.moore.model.Event event = new dix.walton.moore.model.Event();
+        event.setTitle("Poopy event");
+        event.setEndTime(String.valueOf(date.getTime()));
+        event.setId("123");
+        event.setLocation("Home");
+        event.setStartTime(String.valueOf(date.getTime()));
+        event.setEventDate("tomorrow");
+
+        return event;
     }
 }
