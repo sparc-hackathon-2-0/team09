@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.EditText;
 import dix.walton.moore.R;
 import dix.walton.moore.model.Event;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -26,9 +28,9 @@ public class VerifyActivity extends Activity {
         setContentView(R.layout.verify);
 
         Bundle extras = getIntent().getExtras();
-
+        Event event = null;
         if(extras !=null) {
-            String value = extras.getString("voiceString");
+            event = (Event) extras.getSerializable("event");
         }
 
         //TODO replace this with steven's method

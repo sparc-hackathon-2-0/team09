@@ -1,5 +1,6 @@
 package dix.walton.moore.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,5 +18,10 @@ public class DateUtil {
         } else {
             return false;
         }
+    }
+
+    public static String toTime(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss a");
+        return formatter.format(date);
     }
 }

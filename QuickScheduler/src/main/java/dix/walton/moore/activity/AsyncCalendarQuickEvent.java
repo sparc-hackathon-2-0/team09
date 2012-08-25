@@ -18,6 +18,9 @@ public class AsyncCalendarQuickEvent extends AsyncTask<Void, Void, Void> {
 
     private final MenuActivity calendarSample;
     private final ProgressDialog dialog;
+    private Event returnedEvent;
+    private String eventString;
+
 //    private final Calendar entry;
     private com.google.api.services.calendar.Calendar client;
 
@@ -39,6 +42,7 @@ public class AsyncCalendarQuickEvent extends AsyncTask<Void, Void, Void> {
             com.google.api.services.calendar.Calendar.Events.QuickAdd quickAdd = null;
             quickAdd = client.events().quickAdd("primary", "TEST EVENT TODAY AT 3");
             Event event = quickAdd.execute();
+            returnedEvent = event;
 
         } catch (IOException e) {
             calendarSample.handleGoogleException(e);
@@ -52,5 +56,13 @@ public class AsyncCalendarQuickEvent extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         dialog.dismiss();
 //        calendarSample.refresh();
+    }
+
+    public Event getReturnedEvent() {
+        return this.returnedEvent;
+    }
+
+    public void setEventString(String eventStringInput) {
+        this.eventString = eventStringInput;
     }
 }

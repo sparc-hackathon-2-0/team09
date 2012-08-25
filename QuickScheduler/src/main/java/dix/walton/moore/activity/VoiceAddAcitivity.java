@@ -58,11 +58,11 @@ public class VoiceAddAcitivity extends Activity {
         handleVoiceEntryCompleted(data);
     }
 
-    public void handleVoiceEntryCompleted(Intent data) {
+    private void handleVoiceEntryCompleted(Intent data) {
 
         ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
         String firstString = matches.get(0);
-        Intent verifyIntent = new Intent(this, VerifyActivity.class);
+        Intent verifyIntent = new Intent(this, MenuActivity.class);
         verifyIntent.putExtra("voiceString", firstString);
         startActivity(verifyIntent);
         finish();

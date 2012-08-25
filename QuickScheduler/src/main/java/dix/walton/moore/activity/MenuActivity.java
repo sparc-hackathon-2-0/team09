@@ -20,6 +20,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Calendar;
+import com.google.api.services.calendar.model.Event;
 import com.google.common.collect.Lists;
 import dix.walton.moore.R;
 
@@ -28,6 +29,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import dix.walton.moore.util.GoogleEventTransformer;
 
 import java.io.IOException;
 import java.util.Date;
@@ -282,12 +284,6 @@ public class MenuActivity extends Activity {
         });
     }
 
-//    void refresh() {
-//        Collections.sort(calendars);
-//        setListAdapter(
-//                new ArrayAdapter<CalendarInfo>(this, android.R.layout.simple_list_item_1, calendars));
-//    }
-
     private class SettingsButtonHandler implements View.OnClickListener {
         public void onClick(View v) {
             handleSettingsButtonClick();
@@ -300,16 +296,29 @@ public class MenuActivity extends Activity {
         }
     }
 
-
-
-
     public void handleSettingsButtonClick() {
         startActivity(new Intent(this, SettingsActivity.class));
         finish();
     }
 
     public void handleMicButtonClick() {
-        startActivity(new Intent(this, VoiceAddAcitivity.class));
-        finish();
+
+        startActivityForResult(new Intent(this, VoiceAddAcitivity.class), 0);
+        Bundle extras = getIntent().getExtras();
+        String value=null;
+
+        if(extras !=null) {
+            value = extras.getString("voiceString");
+        }
+
+        AsyncCalendarQuickEvent calendarQuickEventActivity = new AsyncCalendarQuickEvent(this);
+        calendarQuickEventActivity.setEventString(value);
+        calendarQuickEventActivity.execute();
+        Event result = calendarQuickEventActivity.getReturnedEvent();
+
+        Intent verifyIntent = new Intent(this, VerifyActivity.class);
+        dix.walton.moore.model.Event ourEvent = GoogleEventTransformer.convertToOurEvent(result);
+        verifyIntent.putExtra("event", ourEvent);
+        startActivity(verifyIntent);
     }
 }

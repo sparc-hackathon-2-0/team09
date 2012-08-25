@@ -3,13 +3,14 @@ package dix.walton.moore.model;
 import android.text.format.Time;
 import dix.walton.moore.util.DateUtil;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * user: ryan.moore
  * date: 8/25/12
  */
-public class Event {
+public class Event implements Serializable {
 
     String title;
     String startTime;
