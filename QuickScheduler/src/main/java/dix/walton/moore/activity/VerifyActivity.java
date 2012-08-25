@@ -15,7 +15,7 @@ import java.util.Date;
  * user: ryan.moore
  * date: 8/25/12
  */
-public class VerifyActivity extends Activity {
+public class VerifyActivity extends MenuActivity {
 
     private Event serviceEvent;
 

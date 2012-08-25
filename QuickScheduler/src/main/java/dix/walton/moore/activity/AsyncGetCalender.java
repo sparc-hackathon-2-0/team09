@@ -36,7 +36,7 @@ public class AsyncGetCalender extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
-                CalendarListEntry calendarListEntry = client.calendarList().get(calenderId).execute();
+                calendarSample.calendar = client.calendarList().get(calenderId).execute();
             } catch (IOException e) {
                 calendarSample.handleGoogleException(e);
             } finally {

@@ -21,6 +21,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Calendar;
+import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.common.collect.Lists;
 import dix.walton.moore.R;
@@ -74,6 +75,8 @@ public class MenuActivity extends Activity {
     String accountName;
 
     String authToken;
+
+    CalendarListEntry calendar;
 
     public com.google.api.services.calendar.Calendar client;
 
