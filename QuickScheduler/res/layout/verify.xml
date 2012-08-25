@@ -2,11 +2,13 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical" android:layout_width="match_parent"
-                android:layout_height="match_parent" android:screenOrientation="landscape">
+                android:layout_height="match_parent" android:screenOrientation="landscape"
+                android:background="@drawable/background">
 
 
     <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true" android:id="@+id/verify_layout">
+                    android:layout_alignParentTop="true" android:id="@+id/verify_layout"
+                    android:paddingTop="20dip">
 
         <ScrollView android:id="@+id/verifyScrollView" android:layout_marginBottom="50dip"
                     android:layout_height="wrap_content" android:layout_width="fill_parent"
@@ -15,7 +17,7 @@
             <TableLayout android:id="@+id/tableLayout1"
                          android:layout_width="fill_parent" android:layout_height="fill_parent"
                          android:stretchColumns="1">
-                <TextView android:text="@string/verify_table_title" android:gravity="center"/>
+                <TextView android:text="@string/verify_table_title" android:gravity="center" android:textSize="20dip"/>
 
                 <TableRow android:padding="5dp">
                     <TextView android:text="@string/title_label"/>
