@@ -17,11 +17,7 @@
         </activity>
         <activity android:name=".activity.SettingsActivity"/>
         <activity android:name=".activity.VoiceAddAcitivity"/>
-<<<<<<< HEAD
         <activity android:name=".activity.VerifyActivity"
                   android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".calendar.CalendarSample"/>
-=======
->>>>>>> commit for calendar quick adding with menu option
     </application>
 </manifest> 
