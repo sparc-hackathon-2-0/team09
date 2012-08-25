@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".activity.SettingsActivity"/>
         <activity android:name=".activity.VoiceAddAcitivity"/>
+        <activity android:name=".activity.VerifyActivity"/>
         <activity android:name=".calendar.CalendarSample"/>
     </application>
 </manifest> 

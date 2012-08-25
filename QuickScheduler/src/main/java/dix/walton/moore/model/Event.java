@@ -1,5 +1,7 @@
 package dix.walton.moore.model;
 
+import android.text.format.Time;
+
 import java.util.Date;
 
 /**
@@ -8,34 +10,43 @@ import java.util.Date;
  */
 public class Event {
 
-    String description;
-    Date startTime;
-    Date endTime;
+    String title;
+    String startTime;
+    String endTime;
+    Date eventDate;
     String location;
     Long id;
 
-    public String getDescription() {
-        return description;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
     }
 
     public String getLocation() {
