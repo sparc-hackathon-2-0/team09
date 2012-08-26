@@ -331,7 +331,6 @@ public class MenuActivity extends Activity {
 
         AsyncCalendarQuickEvent calendarQuickEventActivity = new AsyncCalendarQuickEvent(this);
         calendarQuickEventActivity.setEventString(firstString);
-        calendarQuickEventActivity.setEventString("Appointment at home on August 26 10am-10:25am");
         calendarQuickEventActivity.execute();
         Event result = null;
         while(result == null)

@@ -72,13 +72,9 @@ public class Event implements Serializable {
             event = (Event) eventObj;
         }
 
-        if (event.getId() == this.getId() &&
-                event.getEndTime().equals(this.getEndTime()) &&
-                event.getStartTime().equals(this.getStartTime()) &&
-//                DateUtil.isSameDay(event.getEventDate(), this.getEventDate()) &&
-                event.getEventDate().equals(this.getEventDate()) &&
-                event.getLocation().equals(this.getLocation()) &&
+        if (event.getLocation().equals(this.getLocation()) &&
                 event.getTitle().equals(this.getTitle())) {
+            System.out.println("here");
             return true;
         } else {
             return false;
