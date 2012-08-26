@@ -149,7 +149,7 @@ public class VerifyActivity extends MenuActivity {
 
     private boolean isEventChanged(Event event) {
 
-        if (event.equals(serviceEvent)) {
+        if (!event.equals(serviceEvent)) {
             return true;
         } else {
             return false;
