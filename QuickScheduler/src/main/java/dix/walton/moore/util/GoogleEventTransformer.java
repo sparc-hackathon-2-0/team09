@@ -26,20 +26,22 @@ public class GoogleEventTransformer {
         String startString;
         try {
             startString = googleEvent.getStart().getDateTime().toString();
-            internalEvent.setEventDate(dateFormat.parse(startString).toString());
-            if(!googleEvent.getEndTimeUnspecified())
+            int T = startString.indexOf('T');
+            internalEvent.setEventDate(startString.substring(0,T));
+            internalEvent.setStartTime(startString.substring(T+1, T+6));
+
+            if(googleEvent.getEnd() != null)
             {
                 String endString = googleEvent.getEnd().getDateTime().toString();
-                internalEvent.setEndTime(timeFormat.parse(endString, new ParsePosition(startString.indexOf('T') + 1)).toString());
+                T = endString.indexOf('T');
+                internalEvent.setEndTime(endString.substring(T + 1, T+6));
             }
-            internalEvent.setStartTime(timeFormat.parse(startString, new ParsePosition(startString.indexOf('T') + 1)).toString());
-        } catch (ParseException e) {
+        } catch (Exception e) {
             System.out.println("Exception thrown");
         }
 
         internalEvent.setId(googleEvent.getId());
             internalEvent.setLocation(googleEvent.getLocation());
-            internalEvent.setStartTime(googleEvent.getStart().getDateTime().toString());
             internalEvent.setTitle(googleEvent.getSummary());
         return internalEvent;
     }
