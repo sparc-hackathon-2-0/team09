@@ -147,8 +147,6 @@ public class VerifyActivity extends MenuActivity {
         return event;
     }
 
-
-
     private boolean isEventChanged(Event event) {
 
         if (event.equals(serviceEvent)) {
@@ -156,20 +154,6 @@ public class VerifyActivity extends MenuActivity {
         } else {
             return false;
         }
-    }
-
-
-
-    private boolean deleteEvent(Event event) {
-
-        //TODO implement me
-        return true;
-    }
-
-    private boolean updateEvent(Event event) {
-
-        //TODO implement me
-        return true;
     }
     
     private String getGoogleCallString(Event stubbedEvent) {

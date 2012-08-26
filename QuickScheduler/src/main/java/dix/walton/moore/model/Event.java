@@ -72,6 +72,12 @@ public class Event implements Serializable {
             event = (Event) eventObj;
         }
 
+        if (event.getLocation() == null) {
+            event.setLocation("");
+        }
+        if (event.getTitle() == null) {
+            event.setTitle("");
+        }
         if (event.getLocation().equals(this.getLocation()) &&
                 event.getTitle().equals(this.getTitle())) {
             System.out.println("here");

@@ -25,10 +25,7 @@ public class GoogleEventTransformer {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         String startString;
         try {
-            if(googleEvent.getStart().getDateTime() != null)
-            {
             startString = googleEvent.getStart().getDateTime().toString();
-<<<<<<< HEAD
             int T = startString.indexOf('T');
             internalEvent.setEventDate(startString.substring(0,T));
             internalEvent.setStartTime(startString.substring(T+1, T+6));
@@ -40,30 +37,12 @@ public class GoogleEventTransformer {
                 internalEvent.setEndTime(endString.substring(T + 1, T+6));
             }
         } catch (Exception e) {
-=======
-            internalEvent.setEventDate(dateFormat.parse(startString).toString());
-                internalEvent.setStartTime(timeFormat.parse(startString, new ParsePosition(startString.indexOf('T') + 1)).toString());
-
-            }
-            if(googleEvent.getEnd().getDateTime() != null)
-            {
-                String endString = googleEvent.getEnd().getDateTime().toString();
-                internalEvent.setEndTime(timeFormat.parse(endString, new ParsePosition(endString.indexOf('T') + 1)).toString());
-            }
-
-            } catch (ParseException e) {
->>>>>>> happy birthday!!!!
             System.out.println("Exception thrown");
         }
 
         internalEvent.setId(googleEvent.getId());
-<<<<<<< HEAD
-            internalEvent.setLocation(googleEvent.getLocation());
-            internalEvent.setTitle(googleEvent.getSummary());
-=======
         internalEvent.setLocation(googleEvent.getLocation());
         internalEvent.setTitle(googleEvent.getSummary());
->>>>>>> happy birthday!!!!
         return internalEvent;
     }
 }
