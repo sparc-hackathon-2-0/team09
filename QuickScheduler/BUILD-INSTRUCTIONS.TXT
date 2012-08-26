@@ -1,0 +1,13 @@
+RUN THIS COMMANd IN PROJECT ROOT TED....TED....TED DO IT NOW...TED DAMNIT!
+
+BALLSACK!
+
+AND YALL KNOW YOU BEST BE RUNNIN' THE NEWEST VERSION O' MAVEN DAMNIT!
+
+TO GET AN APK
+---------------------
+mvn com.jayway.maven.plugins.android.generation2:android-maven-plugin:3.3.0:apk
+
+TO DEPLOY TO A DEVICE 
+----------------------
+mvn com.jayway.maven.plugins.android.generation2:android-maven-plugin:3.3.0:deploy
